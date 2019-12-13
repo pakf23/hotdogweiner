@@ -1,0 +1,103 @@
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Over Under</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <nav class="nav bg-danger">
+    <ul class="nav">
+      <li class="nav-item">
+       <a class="nav-link active text-white navbar-brand" href="#"> <img src="higher.png" alt="" style="height: 30px; width: 36px"> </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link text-white" href="index.html">Home</a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link text-white" href="teller.html">Teller</a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link text-white" href="overunder.html">Higher-Lower</a>
+      </li>
+    </ul>
+  </nav>
+  <body onload="newProblem()" style="display: flex; min-height: 100vh; flex-direction: column; background-color: #CAB1BD;">
+    <header>
+      <nav>
+        <div class="nav-wrapper" style="background-color: #9F9AA4">
+          <ul class="center" style="color:#39393A;"><h2>Over Under</h2></ul>
+        </div>
+      </nav>
+    </header>
+    <main style="flex: 1 0 auto; background-color: #D0CFCF">
+      <div class="scroll">
+        <div class="flex-center">
+          <div class="row">
+            <div class="col s6 offset-s3" style="background-color: #FFF9FA">
+              <h3 class="center" id="problem">-</h3>
+              <form class="" action="#" method="">
+                <input type="text" id="textbox" value="">
+                <p class="right">
+                <button class="btn" name="button" onclick="checkAnswer(this.form)"><i class="large material-icons">send</i></button>
+                </p>
+              </form><br><br>
+              <h6 class="center" id="correct"></h6>
+            </div>
+          </div>
+          </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+      function newProblem(){
+        var number = Math.floor(Math.random() * 50) + 1;
+        document.getElementById("problem").innerHTML = number;
+
+        document.getElementById("textbox").value = "";
+        document.getElementById("correct").innerHTML = document.cookie;
+      }
+      function checkAnswer(form){
+        var str = document.getElementById("problem").innerHTML;
+        var number = parseInt(str);
+        // console.log(over);
+        // console.log(under);
+        var answer = Math.floor(Math.random() * 2) + 1;
+        var input = form.textbox.value;
+        console.log(answer);
+        console.log(input);
+        if(input=="over"){
+          input=1
+        }
+        if (input=="under"){
+          input=2
+        }
+        if(input == answer){
+          //document.getElementById("broadcast").innerHTML = "CORRECT!";
+          alert("You Won!");
+          console.log("You Won!");
+          if(document.cookie){
+            var correct = parseInt(document.cookie.substring(19));
+            correct += 1;
+            document.cookie = "Number of correct: " + correct;
+          }
+          else{
+            document.cookie = "Number of correct: 1";
+          }
+        }
+        else{
+          alert("You Lost!");
+          //document.getElementById("broadcast").innerHTML = "The correct answer was " + answer + ".";
+          console.log("incorrect.");
+        }
+        newProblem();
+      }
+    </script>
+  </body>
+</html>
